@@ -1,12 +1,18 @@
+/* styles.css */
+
 body {
   font-family: Arial, sans-serif;
   text-align: center;
   margin-top: 50px;
+  background-color: #f9f9f9; /* 배경색 추가 */
 }
 
 .card-container {
   perspective: 1000px;
-  margin-bottom: 20px;
+  margin: 40px auto; /* 위/아래 여백 증가 */
+  width: 150px; /* 카드 컨테이너 너비 고정 */
+  position: relative;
+  top: 50px; /* 카드를 아래로 이동 */
 }
 
 .card {
@@ -14,9 +20,10 @@ body {
   height: 200px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.6s;
+  transition: transform 0.6s ease-in-out; /* 부드러운 전환 효과 */
   cursor: pointer;
   margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
 }
 
 .card.flipped {
@@ -35,6 +42,7 @@ body {
   font-size: 48px;
   border: 2px solid #000;
   border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
 }
 
 .card-front {
@@ -51,14 +59,39 @@ button {
   margin: 10px;
   padding: 10px 20px;
   cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* 버튼 색상 변경 */
+  color: white; /* 글자 색상 변경 */
+  transition: background-color 0.3s ease; /* 호버 효과 추가 */
+}
+
+button:hover {
+  background-color: #0056b3; /* 호버 시 색상 변경 */
 }
 
 #scoreboard {
   margin-top: 20px;
   font-size: 18px;
+  color: #333; /* 점수판 글자 색상 변경 */
 }
 
 #result {
   font-size: 20px;
   margin-top: 20px;
+  color: #555; /* 결과 메시지 글자 색상 변경 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+  .card {
+    width: 120px;
+    height: 160px;
+    font-size: 36px;
+  }
+
+  button {
+    font-size: 20px;
+    padding: 8px 16px;
+  }
 }
