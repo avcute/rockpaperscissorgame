@@ -1,3 +1,5 @@
+// script.js
+
 let round = 0; // 현재 라운드
 let playerScore = 0; // 플레이어 점수
 let computerScore = 0; // 컴퓨터 점수
@@ -12,7 +14,7 @@ function playGame(playerChoice) {
   const computerChoice = choices[Math.floor(Math.random() * 3)];
 
   // 컴퓨터 카드 뒤집기
-  flipCard('#computer-card', `#${getEmoji(computerChoice)}`, 1000);
+  flipCard('#computer-card', computerChoice, 1000);
 
   // 1.5초 후 승패 결정
   setTimeout(() => {
@@ -24,14 +26,25 @@ function playGame(playerChoice) {
 }
 
 // 카드 뒤집기 함수
-function flipCard(cardSelector, emojiSelector, delay) {
+function flipCard(cardSelector, computerChoice, delay) {
   const card = document.querySelector(cardSelector);
+  const cardBack = card.querySelector('.card-back');
+
+  // 카드 뒤집기 애니메이션
   setTimeout(() => {
     card.classList.add('flipped');
-    if (emojiSelector) {
-      document.querySelector(emojiSelector).textContent = getEmoji(computerChoice);
-    }
+    cardBack.textContent = getEmoji(computerChoice); // 컴퓨터 선택 표시
   }, delay);
+}
+
+// 카드 초기화 함수
+function resetCard() {
+  const card = document.querySelector('#computer-card');
+  const cardBack = card.querySelector('.card-back');
+
+  // 카드 원래 상태로 되돌리기
+  card.classList.remove('flipped');
+  cardBack.textContent = '?'; // 초기 상태는 물음표로 설정
 }
 
 // 승패 결정 함수
@@ -77,13 +90,26 @@ function askToContinue() {
   setTimeout(() => {
     const continueGame = confirm('다음 라운드를 진행하시겠습니까?');
     if (continueGame) {
-      resetCard();
+      resetCard(); // 카드 초기화
     } else {
       alert(`최종 결과: 플레이어 ${playerScore}점, 컴퓨터 ${computerScore}점`);
     }
   }, 500);
 }
 
+// 이모티콘 반환 함수
+function getEmoji(choice) {
+  switch (choice) {
+    case 'rock':
+      return '✊';
+    case 'paper':
+      return '✋';
+    case 'scissors':
+      return '✌️';
+    default:
+      return '?';
+  }
+}
 // 카드 초기화 함수
 function resetCard() {
   const card = document.querySelector('#computer-card');
